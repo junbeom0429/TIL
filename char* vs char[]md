@@ -1,0 +1,17 @@
+##
+이해는 안감;;
+
++
+지역변수를 main함수에서 쓰는법 모르겠음;
+
+---
+
+Example:                       Allocation Type:     Read/Write:    Storage Location:   Memory Used (Bytes):
+===========================================================================================================
+const char* str = "Stack";     Static               Read-only      Code segment        6 (5 chars plus '\0')
+char* str = "Stack";           Static               Read-only      Code segment        6 (5 chars plus '\0')
+char* str = malloc(...);       Dynamic              Read-write     Heap                Amount passed to malloc
+char str[] = "Stack";          Static               Read-write     Stack               6 (5 chars plus '\0')
+char strGlobal[10] = "Global"; Static               Read-write     Data Segment (R/W)  10
+
+---

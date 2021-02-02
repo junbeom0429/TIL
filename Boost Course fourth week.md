@@ -1,4 +1,4 @@
-Boost course fourth week's team mission
+4th week's team mission
 ---
 Mission 4 구도잡기
 

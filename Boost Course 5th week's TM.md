@@ -20,7 +20,7 @@
 ---
 작성 코드 
 ---
-```
+```c
 #include <stdio.h>
 
 int sort(int numOfArr, int *p);

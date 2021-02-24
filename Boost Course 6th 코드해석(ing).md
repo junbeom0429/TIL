@@ -25,12 +25,17 @@ typedef struct node {
 
 /* 합치는 함수 */
 ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-    ListNode* head = (ListNode *)malloc(sizeof(ListNode)); // 리스트를 시작하는 헤드포인터에 ListNode구조체 크기 만큼의 메모리 할당
-    ListNode* pt = head; // 
-
+    // 리스트를 시작하는 헤드포인터에 ListNode구조체 크기 만큼의 메모리 할당
+    ListNode* head = (ListNode *)malloc(sizeof(ListNode));
+    
+    // head구조체는 변하면 안되므로 pt구조체를 만들어 head를 받음
+    ListNode* pt = head;
+    
     l1 = l1->next;
     l2 = l2->next;
-
+    
+    // 둘다 next에 NULL값이 아닌 경우에 동작되어 pt에 크기를 비교하여 연결
+    // 이런 비교가 가능한 이유는 두 리스트가 오름차순으로 정렬되었다는 전제가 있기 때문임
     while (l1!=NULL && l2!=NULL) {
         if (l1->data <= l2->data) {
             pt->next = l1;
@@ -41,6 +46,8 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         }
         pt = pt->next;
     }
+    
+    // 두 리스트간 비교가 끝난 후 나머지가 존재하는 리스트를 그대로 pt에 연결(두 리스트가 정렬되있기 때문에 가능)
     if (l1 != NULL)
         pt->next = l1;
     if (l2 != NULL)
@@ -50,10 +57,12 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
 
 /* 리스트에 변수 붙이기 함수 */
 void append(ListNode* l, int data) {
+    // 새로운 item구조체 생성
     ListNode* item = (ListNode*)malloc(sizeof(ListNode));
     item->data = data;
     item->next = NULL;
-
+    
+    // 임시의 temp구조체 생성하여 l구조체를 받아 연결리스트 끝에 위에서 만든 item
     ListNode* temp = (ListNode*)malloc(sizeof(ListNode));    
     temp = l;
     while(temp->next != NULL) {

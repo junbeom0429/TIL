@@ -55,10 +55,8 @@ int getLastNode (Node* head, int k) {
     for(int i = 0; i <= (count - k); i++) {
         temp = temp->next;
     }
-    int result;
-    result = temp->data;
     
-    return result;
+    return temp->data;
 }
 
 void printList(Node* head) {

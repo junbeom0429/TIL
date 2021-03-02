@@ -25,7 +25,7 @@ typedef struct node {
 
 PERSON* calcAddress(PERSON* head, int num) {
 	PERSON* temp = (PERSON*)malloc(sizeof(PERSON));
-	
+
 	temp = head;
 	for (int i = 0; i < num; i++) {
 		temp = temp->next;
@@ -33,9 +33,9 @@ PERSON* calcAddress(PERSON* head, int num) {
 	return temp;
 }
 
-void getAndAppend(PERSON* head, PERSON** tail, int *num) {
+void getAndAppend(PERSON* head, PERSON** tail, int* num) {
 	PERSON* inform = (PERSON*)malloc(sizeof(PERSON));
-	
+
 	while (1) {
 		printf("%d 번째\n학생 이름 : ", (*num + 1));
 		if (scanf_s("%s", inform->name, (sizeof(inform->name))) == 0) {
@@ -96,7 +96,7 @@ void getAndAppend(PERSON* head, PERSON** tail, int *num) {
 	*num = *num + 1;
 }
 
-void putRank(PERSON *head, int num) {
+void putRank(PERSON* head, int num) {
 	int n = 1;
 	for (int i = 1; i <= (num); i++) {
 		if (i != num &&
@@ -104,7 +104,7 @@ void putRank(PERSON *head, int num) {
 			(calcAddress(head, i)->rank) = n;
 		}
 		else {
-			(calcAddress(head, i )->rank) = n;
+			(calcAddress(head, i)->rank) = n;
 			n = n + 1;
 		}
 	}
@@ -112,8 +112,7 @@ void putRank(PERSON *head, int num) {
 
 void insertionSort(PERSON* head, int num) {
 	PERSON* rememberI = (PERSON*)malloc(sizeof(PERSON));
-	PERSON* rememberJ = (PERSON*)malloc(sizeof(PERSON));
-	
+
 	for (int i = 2; i <= num; i++) {
 		rememberI->next = calcAddress(head, i);
 		for (int j = (i - 1); j > 0; j--) {
@@ -164,21 +163,19 @@ int main() {
 				printf("---------------------------------------\n");
 				printf("   이름   국어  영어  수학  총점  등수\n");
 				printf("---------------------------------------\n");
-
-				for (int i = 1; i <= num; i++) {
-					printf(" %8s %4d  %4d  %4d  %4d   1등\n",
-						calcAddress(head, i)->name,
-						calcAddress(head, i)->kor,
-						calcAddress(head, i)->eng,
-						calcAddress(head, i)->math,
-						calcAddress(head, i)->total);
-				}
+				printf(" %8s %4d  %4d  %4d  %4d   1등\n",
+					calcAddress(head, 1)->name,
+					calcAddress(head, 1)->kor,
+					calcAddress(head, 1)->eng,
+					calcAddress(head, 1)->math,
+					calcAddress(head, 1)->total);
+				
 				printf("---------------------------------------\n");
 			}
 			else if (num >= 2) {
 				insertionSort(head, num);
 				putRank(head, num);
-				
+
 				printf("---------------------------------------\n");
 				printf("   이름   국어  영어  수학  총점  등수\n");
 				printf("---------------------------------------\n");
@@ -193,6 +190,7 @@ int main() {
 						calcAddress(head, i)->rank);
 				}
 				printf("---------------------------------------\n");
+				rewind(stdin);
 			}
 		}
 		else {

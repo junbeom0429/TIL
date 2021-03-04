@@ -96,33 +96,84 @@ void getAndAppend(PERSON* head, PERSON** tail, int* num) {
 	*num = *num + 1;
 }
 
-void putRank(PERSON* head, int num) {
+void putRank(PERSON* sortedArr, int num) {
 	int n = 1;
 	for (int i = 1; i <= (num); i++) {
 		if (i != num &&
-			(calcAddress(head, i)->total) == (calcAddress(head, (i + 1))->total)) {
-			(calcAddress(head, i)->rank) = n;
+			(calcAddress(sortedArr, i)->total) == (calcAddress(sortedArr, (i + 1))->total)) {
+			(calcAddress(sortedArr, i)->rank) = n;
 		}
 		else {
-			(calcAddress(head, i)->rank) = n;
+			(calcAddress(sortedArr, i)->rank) = n;
 			n = n + 1;
 		}
 	}
 }
 
-void insertionSort(PERSON* head, int num) {
+void insertionSort(PERSON* sortedArr,PERSON* head, int num) {
+	sortedArr = head;
 	PERSON* rememberI = (PERSON*)malloc(sizeof(PERSON));
 
 	for (int i = 2; i <= num; i++) {
-		rememberI->next = calcAddress(head, i);
+		rememberI->next = calcAddress(sortedArr, i);
 		for (int j = (i - 1); j > 0; j--) {
-			if ((rememberI->next->total) > (calcAddress(head, j)->total)) {
-				calcAddress(head, j)->next = calcAddress(head, (j + 1))->next;
-				rememberI->next->next = calcAddress(head, j);
-				calcAddress(head, (j - 1))->next = rememberI->next;
+			if ((rememberI->next->total) > (calcAddress(sortedArr, j)->total)) {
+				calcAddress(sortedArr, j)->next = calcAddress(sortedArr, (j + 1))->next;
+				rememberI->next->next = calcAddress(sortedArr, j);
+				calcAddress(sortedArr, (j - 1))->next = rememberI->next;
 			}
 		}
 	}
+}
+
+void printScores(PERSON* head, PERSON* sortedArr, int num) {
+	if (num == 0) {
+		printf("\n성적 입력을 먼저 해주세요\n\n");
+	}
+	else if (num == 1) {
+		printf("---------------------------------------\n");
+		printf("   이름   국어  영어  수학  총점  등수\n");
+		printf("---------------------------------------\n");
+		printf(" %8s %4d  %4d  %4d  %4d   1등\n",
+			calcAddress(head, 1)->name,
+			calcAddress(head, 1)->kor,
+			calcAddress(head, 1)->eng,
+			calcAddress(head, 1)->math,
+			calcAddress(head, 1)->total);
+
+		printf("---------------------------------------\n");
+	}
+	else if (num >= 2) {
+		insertionSort(sortedArr, head, num);
+		putRank(sortedArr, num);
+
+		printf("---------------------------------------\n");
+		printf("   이름   국어  영어  수학  총점  등수\n");
+		printf("---------------------------------------\n");
+
+		for (int i = 1; i <= num; i++) {
+			printf(" %8s %4d  %4d  %4d  %4d  %2d등\n",
+				calcAddress(sortedArr, i)->name,
+				calcAddress(sortedArr, i)->kor,
+				calcAddress(sortedArr, i)->eng,
+				calcAddress(sortedArr, i)->math,
+				calcAddress(sortedArr, i)->total,
+				calcAddress(sortedArr, i)->rank);
+		}
+		printf("---------------------------------------\n");
+	}
+}
+
+void printMenu(int* choice) {
+	printf("---------------\n");
+	printf("[Menu]\n");
+	printf("1.성적 입력\n");
+	printf("2.성적 확인\n");
+	printf("3.종료\n");
+	printf("---------------\n");
+	printf("선택(1~3) : ");
+	scanf("%d", &choice);
+	printf("---------------\n");
 }
 
 int main() {
@@ -130,20 +181,14 @@ int main() {
 	head->next = NULL;
 	PERSON* tail = (PERSON*)malloc(sizeof(PERSON));
 	tail->next = head;
+	PERSON* sortedArr = (PERSON*)malloc(sizeof(PERSON));
+
 
 	int num = 0;
-	int choice;
+	int choice = 0;
 
 	while (1) {
-		printf("---------------\n");
-		printf("[Menu]\n");
-		printf("1.성적 입력\n");
-		printf("2.성적 확인\n");
-		printf("3.종료\n");
-		printf("---------------\n");
-		printf("선택(1~3) : ");
-		scanf("%d", &choice);
-		printf("---------------\n");
+		printMenu(&choice);
 
 		if (choice == 3) {
 			rewind(stdin);
@@ -155,43 +200,8 @@ int main() {
 		}
 		else if (choice == 2) {
 			rewind(stdin);
-			if (num == 0) {
-				printf("\n성적 입력을 먼저 해주세요\n\n");
-				choice = 0;
-			}
-			else if (num == 1) {
-				printf("---------------------------------------\n");
-				printf("   이름   국어  영어  수학  총점  등수\n");
-				printf("---------------------------------------\n");
-				printf(" %8s %4d  %4d  %4d  %4d   1등\n",
-					calcAddress(head, 1)->name,
-					calcAddress(head, 1)->kor,
-					calcAddress(head, 1)->eng,
-					calcAddress(head, 1)->math,
-					calcAddress(head, 1)->total);
-				
-				printf("---------------------------------------\n");
-			}
-			else if (num >= 2) {
-				insertionSort(head, num);
-				putRank(head, num);
-
-				printf("---------------------------------------\n");
-				printf("   이름   국어  영어  수학  총점  등수\n");
-				printf("---------------------------------------\n");
-
-				for (int i = 1; i <= num; i++) {
-					printf(" %8s %4d  %4d  %4d  %4d  %2d등\n",
-						calcAddress(head, i)->name,
-						calcAddress(head, i)->kor,
-						calcAddress(head, i)->eng,
-						calcAddress(head, i)->math,
-						calcAddress(head, i)->total,
-						calcAddress(head, i)->rank);
-				}
-				printf("---------------------------------------\n");
-				rewind(stdin);
-			}
+			printfscores(head, sortedArr, num);
+			choice = 0;
 		}
 		else {
 			rewind(stdin);

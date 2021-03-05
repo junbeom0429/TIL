@@ -1,3 +1,11 @@
+### 어려웠던 부분
+---
+* 지역변수(함수 포함) 안에의 malloc은 지역변수가 끝나는 순간  
+없어지기에 free()할 필요가 없다!
+* 연결리스트 free() 방법
+
+
+---
 ![image](/images/C_19_q5.jpeg)  
 ---
 ### 작성 코드
@@ -277,7 +285,6 @@ int main() {
 	int choice = 0;
 
 	loadVariable(&num);
-				printf("%d", num);
 	PERSON* head = (PERSON*)malloc(sizeof(PERSON));
 	head->next = NULL;
 

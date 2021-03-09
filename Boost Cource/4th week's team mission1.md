@@ -24,7 +24,7 @@ char타입의 *(input + i)와 int타입의 i를 비교해서
 ---
 작성한 코드
 ---
-```
+```c
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>

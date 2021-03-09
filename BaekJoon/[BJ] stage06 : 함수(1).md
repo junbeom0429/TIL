@@ -1,8 +1,8 @@
-배열로 사용시 스택이 초과되어    
-malloc을 통해 힙에 생성
+![image](/images/BJ_stage06_q2.jpg)
 ```c
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void generator(int* result) {
     for (int i = 0; i < 10000; i++) {
@@ -38,7 +38,7 @@ void generator(int* result) {
             break;
         }
 
-        if (temp <= 10000) {
+        if (temp < 10000) {
             result[temp] = 0;
         }
     }
@@ -46,12 +46,15 @@ void generator(int* result) {
 
 int main() {
     int* result = (int*)calloc(10000, sizeof(int));
+    for (int i = 0; i < 10000; i++) {
+        result[i] = i;
+    }
 
     generator(result);
 
     for (int i = 0; i < 10000; i++) {
-        if (result[i] != 0) {
-            printf("%d\n", result[i]);
+        if (*(result + i) != 0) {
+            printf("%d\n", *(result + i));
         }
     }
 

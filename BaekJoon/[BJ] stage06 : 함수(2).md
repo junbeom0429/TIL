@@ -65,14 +65,15 @@ int main() {
 		printf("%d", result);
 	}
 	else {
-		int digits = calcDigits(input);
-		int* places = (int*)calloc(digits, sizeof(int));
-		int* difference = (int*)calloc(digits, sizeof(int));
-
 		for (int i = 100; i <= input; i++) {
-			calcPlaces(input, places, digits);
+			int digits = calcDigits(i);
+			int* places = (int*)calloc(digits, sizeof(int));
+			int* difference = (int*)calloc(digits, sizeof(int));
+			calcPlaces(i, places, digits);
 			calcDifference(places, difference, digits);
-			result = result + calcHan(input, difference, digits);
+			result = result + calcHan(i, difference, digits);
+			free(places);
+			free(difference);
 		}
 
 		printf("%d", (result + 99));

@@ -13,7 +13,7 @@ int main() {
 
 	while (1) {
 		compare = compare + (6 * i);
-		if (input < compare) {
+		if (input <= compare) {
 			result = i + 1;
 			break;
 		}

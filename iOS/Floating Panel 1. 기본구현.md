@@ -17,7 +17,10 @@
 
     결국 라이브러리를 찾아보았고
 
-    Floating Panel이라는 라이브러리를 찾았다 [https://github.com/scenee/FloatingPanel](https://github.com/scenee/FloatingPanel)
+    Floating Panel이라는 라이브러리를 찾았다  
+    [https://github.com/scenee/FloatingPanel](https://github.com/scenee/FloatingPanel)  
+    [https://www.youtube.com/watch?v=bmYgQvfkk_w](https://www.youtube.com/watch?v=bmYgQvfkk_w)  
+    (참고 - 비슷한 것) [https://www.youtube.com/watch?v=L-f1KSPKm4I](https://www.youtube.com/watch?v=L-f1KSPKm4I)  
 
     ```swift
     fpc = FloatingPanelController()
